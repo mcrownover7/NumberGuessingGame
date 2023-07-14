@@ -1,4 +1,6 @@
-﻿namespace NumberGuessingGame
+﻿using System;
+
+namespace NumberGuessingGame
 {
     class Program
     {
@@ -12,21 +14,32 @@
             {
                 Console.Write("Guess a number between 0 and 100:  ");
                 string guess = Console.ReadLine();
+                int i;
 
-                int intGuess = int.Parse(guess);
-
-                if (intGuess > winNum)
+                if (Int32.TryParse(guess, out i))
                 {
-                    Console.WriteLine("To high! Guess lower...");
+                    int intGuess = int.Parse(guess);
+                    if (intGuess > 100 || intGuess < 0)
+                    {
+                        Console.WriteLine("Please guess a number between 0 and 100.");
+                    }
+                    else if (intGuess > winNum)
+                    {
+                        Console.WriteLine("To high! Guess lower...");
+                    }
+                    else if (intGuess < winNum)
+                    {
+                        Console.WriteLine("To low! Guess higher...");
+                    }
+                    else if (intGuess == winNum)
+                    {
+                        Console.WriteLine("You Win!!!");
+                        win = true;
+                    }
                 }
-                else if (intGuess < winNum)
+                else
                 {
-                    Console.WriteLine("To low! Guess higher...");
-                }
-                else if (intGuess == winNum)
-                {
-                    Console.WriteLine("You Win!!!");
-                    win = true;
+                    Console.WriteLine("Please guess an integer.");
                 }
 
                 Console.WriteLine();
